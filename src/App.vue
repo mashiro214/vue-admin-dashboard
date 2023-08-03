@@ -9,13 +9,30 @@
 </template>
 
 <style lang="scss">
+@import "@/global-styles/colors.scss";
+@import "@/global-styles/typography.scss";
+
+// 使背景色应用到整个页面
+body {
+  background-color: $dark-blue;
+}
+
+h1 {
+  @include heading-1;
+}
+
+p {
+  @include large-text-bold($purple);
+}
+
+// option+z to wrap the code
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  // use fonts from scss file
+  font-family: $system-font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background-color: black;
+  color: $white;
 }
 
 nav {
@@ -23,7 +40,7 @@ nav {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: $white;
 
     &.router-link-exact-active {
       color: #42b983;
