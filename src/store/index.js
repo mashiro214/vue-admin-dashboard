@@ -11,7 +11,8 @@ if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 }
 
 // 初始化state先判断用户是否已经设置模式
-const userSelectedDarkMode = window.localStorage.getItem("isDarkMode") === true;
+const userSelectedDarkMode =
+  window.localStorage.getItem("isDarkMode") === "true";
 
 const state = {
   isDarkMode: userSelectedDarkMode,
@@ -30,7 +31,11 @@ const mutations = {
     state.isDarkMode = !state.isDarkMode;
     document.body.style.background = state.isDarkMode ? "#212c4f" : "#f0f3f5";
     // 把状态存入到local storage
-    window.localStorage.setItem("isDarkMode", state.isDarkMode ? true : false);
+    window.localStorage.setItem(
+      "isDarkMode",
+      state.isDarkMode ? "true" : "false"
+    );
+    // alert("Getting localStorage: " + window.localStorage.getItem("isDarkMode"));
   },
 };
 

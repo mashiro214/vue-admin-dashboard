@@ -6,6 +6,9 @@
 </template>
 
 <script>
+// import animate.css
+// import "animate.css";
+
 export default {
   name: "App",
   // 生命周期函数
@@ -17,6 +20,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import "animate.css";
+// css selector
+// apply to all elements in html
+* {
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 // 使背景色应用到整个页面
 body {
   background-color: $dark-blue;
@@ -51,5 +61,101 @@ nav {
       color: #42b983;
     }
   }
+}
+
+.title-4 {
+  margin: 0;
+  line-height: 34px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.input-field {
+  // background: rgba(255, 255, 255, 0.2);
+  // border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  height: 60px;
+  // width of the container
+  width: 100%;
+
+  font-size: 20px;
+  color: white;
+  padding-left: 20px;
+  margin-top: 20px;
+
+  /* &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  } */
+}
+
+.click-button {
+  background: #56ccf2;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border: none;
+
+  height: 60px;
+  width: 100%;
+
+  font-size: 20px;
+  color: white;
+
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+// style for router link
+.message {
+  line-height: 25px;
+  font-size: 16px;
+  text-align: center;
+
+  // no underline
+  text-decoration: none;
+}
+
+/* THEME */
+.light-background {
+  background-color: $light-gray;
+}
+
+.dark-background {
+  background-color: $dark-blue;
+}
+
+.light-text {
+  color: $white;
+}
+
+.dark-text {
+  color: $black;
+}
+
+.light-field {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.dark-field {
+  background: rgba(198, 208, 235, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.light-link {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.dark-link {
+  color: rgba(0, 0, 0, 0.3);
 }
 </style>

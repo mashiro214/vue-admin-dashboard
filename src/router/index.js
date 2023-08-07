@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
+import TeamView from "../views/TeamView.vue";
 import SignInView from "../views/SignInFlow/SignInView";
 import SignInRequest from "../views/SignInFlow/SignInRequest";
 import SignInRecover from "../views/SignInFlow/SignInRecover";
@@ -15,9 +15,9 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    component: AboutView,
+    path: "/team",
+    name: "team",
+    component: TeamView,
   },
   {
     path: "/signin",
