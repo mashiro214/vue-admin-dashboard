@@ -61,7 +61,14 @@ export default {
   },
   methods: {
     onSubmit() {
-      // const email = this.email;
+      const email = this.email;
+      this.$router.push({
+        name: "signin",
+        params: {
+          userRequestedAccount: true,
+          email: email,
+        },
+      });
     },
   },
   mounted() {
