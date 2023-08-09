@@ -47,6 +47,8 @@
 <script>
 import VueApexCharts from "vue-apexcharts";
 import AppHeader from "@/components/AppHeader.vue";
+import { db } from "@/firebase.js";
+import { collection, getDocs } from "@firebase/firestore";
 
 export default {
   name: "HomeView",
@@ -60,6 +62,37 @@ export default {
     AppHeader,
     apexchart: VueApexCharts,
   },
+
+  async firestore() {
+    const trafficRef = collection(db, "traffic");
+
+    try {
+      const trafficSnapshot = await getDocs(trafficRef);
+      // const trafficData = trafficSnapshot.docs.map((doc) => doc.data());
+      const trafficData = trafficSnapshot.docs.reduce((acc, doc) => {
+        acc[doc.id] = doc.data();
+        return acc;
+      }, {});
+      console.log(trafficData);
+
+      const activeUsers = Object.values(trafficData.activeUsers);
+      const newUsers = Object.values(trafficData.newUsers);
+
+      this.series = [
+        {
+          name: "active users",
+          data: activeUsers,
+        },
+        {
+          name: "new users",
+          data: newUsers,
+        },
+      ];
+    } catch (error) {
+      alert(error);
+    }
+  },
+
   data() {
     return {
       chartOptions: {
@@ -97,22 +130,7 @@ export default {
         },
       },
       // data values in y-axis
-      series: [
-        {
-          name: "active users",
-          data: [
-            [new Date("January 1, 2019"), 30],
-            [new Date("January 5, 2019"), 40],
-          ],
-        },
-        {
-          name: "new users",
-          data: [
-            [new Date("January 1, 2019"), 80],
-            [new Date("January 5, 2019"), 20],
-          ],
-        },
-      ],
+      series: [],
     };
   },
   methods: {
