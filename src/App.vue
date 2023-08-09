@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
+  >
     <!-- header for the entire app -->
     <router-view />
   </div>
@@ -11,6 +14,11 @@
 
 export default {
   name: "App",
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
+  },
   // 生命周期函数
   mounted() {
     const isDarkMode = this.$store.getters.isDarkMode;
@@ -29,6 +37,7 @@ export default {
 
 // 使背景色应用到整个页面
 body {
+  margin: 0;
   background-color: $dark-blue;
 }
 
@@ -46,21 +55,8 @@ p {
   font-family: $system-font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: $white;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: $white;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 
 .title-4 {
@@ -119,10 +115,20 @@ nav {
 /* THEME */
 .light-background {
   background-color: $light-gray;
+  // style property for svg
+  line,
+  text {
+    stroke: $black;
+  }
 }
 
 .dark-background {
   background-color: $dark-blue;
+  // style property for svg
+  line,
+  text {
+    stroke: $light-gray;
+  }
 }
 
 .light-text {
@@ -136,6 +142,7 @@ nav {
 .light-field {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  color: $white;
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.3);
@@ -145,6 +152,7 @@ nav {
 .dark-field {
   background: rgba(198, 208, 235, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
+  color: $black;
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.3);
@@ -157,5 +165,20 @@ nav {
 
 .dark-link {
   color: rgba(0, 0, 0, 0.3);
+}
+
+.light-box {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-box {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+line,
+text {
+  opacity: 0.2;
 }
 </style>

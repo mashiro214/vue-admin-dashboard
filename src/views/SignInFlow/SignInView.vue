@@ -152,6 +152,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  text-align: center;
   display: flex;
   // horizontal
   justify-content: center;
