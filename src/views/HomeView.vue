@@ -75,8 +75,25 @@ export default {
       }, {});
       console.log(trafficData);
 
-      const activeUsers = Object.values(trafficData.activeUsers);
-      const newUsers = Object.values(trafficData.newUsers);
+      // const activeUsers = Object.values(trafficData.activeUsers);
+      // const newUsers = Object.values(trafficData.newUsers);
+
+      const activeUsers = [];
+      const newUsers = [];
+      const todaysDate = new Date();
+      const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
+
+      Object.keys(trafficData.activeUsers).map((key) => {
+        if (new Date(trafficData.activeUsers[key][0]) > lastWeekDate) {
+          activeUsers.push(trafficData.activeUsers[key]);
+        }
+      });
+
+      Object.keys(trafficData.newUsers).map((key) => {
+        if (new Date(trafficData.newUsers[key][0]) > lastWeekDate) {
+          newUsers.push(trafficData.newUsers[key]);
+        }
+      });
 
       this.series = [
         {
@@ -135,7 +152,7 @@ export default {
   },
   methods: {
     // 动态切换样式
-    toggleDays() {
+    async toggleDays() {
       this.$refs.days.style.color = "white";
       this.$refs.days.style.background = "#56CCF2";
       this.$refs.days.style.borderRadius = "4px";
@@ -147,8 +164,50 @@ export default {
       this.$refs.months.style.color = "#5b6175";
       this.$refs.months.style.background = "none";
       this.$refs.months.style.borderRadius = "none";
+
+      const trafficRef = collection(db, "traffic");
+      const activeUsers = [];
+      const newUsers = [];
+
+      try {
+        const trafficSnapshot = await getDocs(trafficRef);
+        // const trafficData = trafficSnapshot.docs.map((doc) => doc.data());
+        const trafficData = trafficSnapshot.docs.reduce((acc, doc) => {
+          acc[doc.id] = doc.data();
+          return acc;
+        }, {});
+        console.log(trafficData);
+
+        const todaysDate = new Date();
+        const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
+
+        Object.keys(trafficData.activeUsers).map((key) => {
+          if (new Date(trafficData.activeUsers[key][0]) > lastWeekDate) {
+            activeUsers.push(trafficData.activeUsers[key]);
+          }
+        });
+
+        Object.keys(trafficData.newUsers).map((key) => {
+          if (new Date(trafficData.newUsers[key][0]) > lastWeekDate) {
+            newUsers.push(trafficData.newUsers[key]);
+          }
+        });
+
+        this.series = [
+          {
+            name: "active users",
+            data: activeUsers,
+          },
+          {
+            name: "new users",
+            data: newUsers,
+          },
+        ];
+      } catch (error) {
+        alert(error);
+      }
     },
-    toggleWeeks() {
+    async toggleWeeks() {
       this.$refs.days.style.color = "#5b6175";
       this.$refs.days.style.background = "none";
       this.$refs.days.style.borderRadius = "none";
@@ -160,8 +219,50 @@ export default {
       this.$refs.months.style.color = "#5b6175";
       this.$refs.months.style.background = "none";
       this.$refs.months.style.borderRadius = "none";
+
+      const trafficRef = collection(db, "traffic");
+      const activeUsers = [];
+      const newUsers = [];
+
+      try {
+        const trafficSnapshot = await getDocs(trafficRef);
+        // const trafficData = trafficSnapshot.docs.map((doc) => doc.data());
+        const trafficData = trafficSnapshot.docs.reduce((acc, doc) => {
+          acc[doc.id] = doc.data();
+          return acc;
+        }, {});
+        console.log(trafficData);
+
+        const todaysDate = new Date();
+        const lastMonthDate = todaysDate.setDate(todaysDate.getDate() - 30);
+
+        Object.keys(trafficData.activeUsers).map((key) => {
+          if (new Date(trafficData.activeUsers[key][0]) > lastMonthDate) {
+            activeUsers.push(trafficData.activeUsers[key]);
+          }
+        });
+
+        Object.keys(trafficData.newUsers).map((key) => {
+          if (new Date(trafficData.newUsers[key][0]) > lastMonthDate) {
+            newUsers.push(trafficData.newUsers[key]);
+          }
+        });
+
+        this.series = [
+          {
+            name: "active users",
+            data: activeUsers,
+          },
+          {
+            name: "new users",
+            data: newUsers,
+          },
+        ];
+      } catch (error) {
+        alert(error);
+      }
     },
-    toggleMonths() {
+    async toggleMonths() {
       this.$refs.days.style.color = "#5b6175";
       this.$refs.days.style.background = "none";
       this.$refs.days.style.borderRadius = "none";
@@ -173,6 +274,48 @@ export default {
       this.$refs.months.style.color = "white";
       this.$refs.months.style.background = "#56CCF2";
       this.$refs.months.style.borderRadius = "4px";
+
+      const trafficRef = collection(db, "traffic");
+      const activeUsers = [];
+      const newUsers = [];
+
+      try {
+        const trafficSnapshot = await getDocs(trafficRef);
+        // const trafficData = trafficSnapshot.docs.map((doc) => doc.data());
+        const trafficData = trafficSnapshot.docs.reduce((acc, doc) => {
+          acc[doc.id] = doc.data();
+          return acc;
+        }, {});
+        console.log(trafficData);
+
+        const todaysDate = new Date();
+        const lastYearDate = todaysDate.setDate(todaysDate.getDate() - 365);
+
+        Object.keys(trafficData.activeUsers).map((key) => {
+          if (new Date(trafficData.activeUsers[key][0]) > lastYearDate) {
+            activeUsers.push(trafficData.activeUsers[key]);
+          }
+        });
+
+        Object.keys(trafficData.newUsers).map((key) => {
+          if (new Date(trafficData.newUsers[key][0]) > lastYearDate) {
+            newUsers.push(trafficData.newUsers[key]);
+          }
+        });
+
+        this.series = [
+          {
+            name: "active users",
+            data: activeUsers,
+          },
+          {
+            name: "new users",
+            data: newUsers,
+          },
+        ];
+      } catch (error) {
+        alert(error);
+      }
     },
   },
 };
