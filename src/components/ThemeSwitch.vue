@@ -39,6 +39,9 @@ export default {
   box-sizing: border-box;
   margin: 50px auto;
   display: flex;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .light-toggle {
   background: linear-gradient(346.78deg, #f7fcfc 0%, #fafcfa 100%);

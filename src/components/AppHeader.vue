@@ -60,11 +60,13 @@ export default {
 
 <style lang="scss" scoped>
 .nav-light {
-  background: $white;
+  background: #f0f3f5;
+  box-shadow: 1px 3px 20px 4px #c6d0eb59;
 }
 
 .nav-dark {
   background: $super-dark-blue;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 #nav {
@@ -106,5 +108,8 @@ export default {
   display: flex;
   gap: 3px;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>

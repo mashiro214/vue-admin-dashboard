@@ -22,24 +22,22 @@
         :options="chartOptions"
         :series="series"
       ></apexchart>
-      <iframe
-        v-if="isDarkMode"
-        width="600"
-        height="450"
-        src="https://lookerstudio.google.com/embed/reporting/aa54825a-31ec-4f3a-9da7-7c8745c50d4f/page/N0LZD"
-        frameborder="0"
-        style="border: 0"
-        allowfullscreen
-      ></iframe>
-      <iframe
-        v-if="!isDarkMode"
-        width="600"
-        height="450"
-        src="https://lookerstudio.google.com/embed/reporting/0378b668-3e70-4a4a-8122-b16f41c87c3f/page/N0LZD"
-        frameborder="0"
-        style="border: 0"
-        allowfullscreen
-      ></iframe>
+      <div class="iframe-container">
+        <iframe
+          v-if="isDarkMode"
+          src="https://lookerstudio.google.com/embed/reporting/aa54825a-31ec-4f3a-9da7-7c8745c50d4f/page/N0LZD"
+          frameborder="0"
+          style="border: 0"
+          allowfullscreen
+        ></iframe>
+        <iframe
+          v-if="!isDarkMode"
+          src="https://lookerstudio.google.com/embed/reporting/0378b668-3e70-4a4a-8122-b16f41c87c3f/page/N0LZD"
+          frameborder="0"
+          style="border: 0"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
   </div>
 </template>
@@ -81,16 +79,16 @@ export default {
       const activeUsers = [];
       const newUsers = [];
       const todaysDate = new Date();
-      const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
+      const lastMonthDate = todaysDate.setDate(todaysDate.getDate() - 30);
 
       Object.keys(trafficData.activeUsers).map((key) => {
-        if (new Date(trafficData.activeUsers[key][0]) > lastWeekDate) {
+        if (new Date(trafficData.activeUsers[key][0]) > lastMonthDate) {
           activeUsers.push(trafficData.activeUsers[key]);
         }
       });
 
       Object.keys(trafficData.newUsers).map((key) => {
-        if (new Date(trafficData.newUsers[key][0]) > lastWeekDate) {
+        if (new Date(trafficData.newUsers[key][0]) > lastMonthDate) {
           newUsers.push(trafficData.newUsers[key]);
         }
       });
@@ -326,25 +324,34 @@ export default {
   padding-left: 15%;
   padding-right: 15%;
 }
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 75%; /* 16:9 ratio */
+  height: 0;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .spread {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 40px;
   width: 100%;
-}
-
-.title-1.dark {
-  @include heading-3($black);
-}
-
-.title-1.light {
-  @include heading-3($white);
 }
 
 .toggle {
   @include medium-text;
   color: $dark-gray;
-  height: 50px;
+  height: 40px;
   width: 240px;
   border-radius: 6px;
   padding: 5px;
@@ -366,13 +373,13 @@ export default {
 
 .days {
   @include toggle-settings();
-  background: $teal;
-  border-radius: 4px;
-  color: $white;
 }
 
 .weeks {
   @include toggle-settings();
+  background: $teal;
+  border-radius: 4px;
+  color: $white;
 }
 
 .months {

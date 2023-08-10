@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="team">
     <AppHeader />
     <div class="container">
       <h2 class="title-2" :class="{ dark: !isDarkMode, light: isDarkMode }">
@@ -129,7 +129,8 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  margin-left: 25px;
+  padding-left: 15%;
+  padding-right: 10%;
 }
 .title-2.light {
   @include heading-2($white);
@@ -155,6 +156,7 @@ export default {
   margin-top: 0;
 }
 .cards {
+  margin: 0 -20px;
   display: flex;
   // overflowed content to next line
   flex-wrap: wrap;
@@ -171,6 +173,9 @@ export default {
   height: 400px;
   border-radius: 10px;
   margin: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .card-1 {
   animation-delay: 0s;
@@ -198,18 +203,23 @@ export default {
   background: #283049;
 }
 .light-card {
-  background: $white;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  // box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 15px 30px rgba(103, 110, 144, 0.15);
   // 相当于：.button:hover
   &:hover {
-    box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.35);
+    // box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 4px rgba(103, 110, 144, 0.05),
+      0 2px 2px rgba(103, 110, 144, 0.05);
   }
 }
 .dark-card {
   background: $super-dark-blue;
-  box-shadow: 0px 20px 40px rgba(255, 255, 255, 0.15);
+  // box-shadow: 0px 20px 40px rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   &:hover {
-    box-shadow: 0px 30px 60px rgba(255, 255, 255, 0.35);
+    // box-shadow: 0px 30px 60px rgba(255,255,255,0.35);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.25);
   }
 }
 </style>

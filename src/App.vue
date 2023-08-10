@@ -41,8 +41,12 @@ body {
   background-color: $dark-blue;
 }
 
-h1 {
-  @include heading-1;
+.title-1.dark {
+  @include heading-3($black);
+}
+
+.title-1.light {
+  @include heading-3($white);
 }
 
 p {
@@ -100,6 +104,9 @@ p {
 
   margin-top: 20px;
   margin-bottom: 40px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 // style for router link
@@ -173,8 +180,8 @@ p {
 }
 
 .dark-box {
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 line,

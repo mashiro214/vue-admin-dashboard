@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import TeamView from "../views/TeamView.vue";
+import ManageView from "../views/ManageView.vue";
 import SignInView from "../views/SignInFlow/SignInView";
 import SignInRequest from "../views/SignInFlow/SignInRequest";
 import SignInRecover from "../views/SignInFlow/SignInRecover";
@@ -23,6 +24,15 @@ const routes = [
     path: "/team",
     name: "team",
     component: TeamView,
+    // 登录可见
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/manage",
+    name: "manage",
+    component: ManageView,
     // 登录可见
     meta: {
       requiresAuth: true,
